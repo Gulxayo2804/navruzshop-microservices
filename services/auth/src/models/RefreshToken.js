@@ -3,12 +3,20 @@ const mongoose = require('mongoose');
 const refreshTokenSchema = mongoose.Schema({
     token: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     userId: {
-        type: mongoose.SchemaType.ObjectID,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    expiresAt: {
+        type: Date,
         required: true
     }
+}, {
+    timestamps: true
 })
 
 module.exports = mongoose.Model('RefreshToken', refreshTokenSchema);
