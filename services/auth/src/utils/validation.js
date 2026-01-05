@@ -1,24 +1,12 @@
-const winston = require('winston');
+const Joi = require('joi');
 
-const logger = winston.createLogger({
-    level: process.env.NODE_ENV === "production" ? "info" : "debug",
-    fromat: winston.format.combine(
-        winston.format.timestamp,
-        winston.format.errors({ stack: true }),
-        winston.format.splat(),
-        winston.format.json()
-    ),
-    defaultMeta: { service: 'auth' },
-    transports: [
-        new winston.transports.Console({
-            format: winston.format.combine(
-                winston.format.colorize(),
-                winston.format.simple(),
-            )
-        }),
-        new winston.transports.File({ filename: "error.log", level: "error" }),
-        new winston.transports.File({ filename: "combined.log" })
-    ]
-})
+const validateRegistration = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().min(3).max(50).required(),
+        email: Joi.string().required().email(),
+        password: Joi.string().min(6).required()
+    })
+    return schema.validate(data)
+}
 
-module.exports = logger;
+module.exports = { validateRegistration }
