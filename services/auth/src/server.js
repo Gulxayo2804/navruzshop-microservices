@@ -7,6 +7,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 const { RateLimiterRedis } = require('rate-limiter-flexible');
 const Redis = require('ioredis');
+const {rateLimit} = require('express-rate-limit');
+const {RedisStore}=require('rate-limit-redis')
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
     logger.info('Connected to mongod');
@@ -40,3 +42,23 @@ app.use((req,res,next)=>{
         res.status(429).json({success: false, message:"too many requests"})
     })
 })
+
+//Ip based rate limiting for sensitive endpoints
+const sensitiveEndpointsLimiter = rateLimit({
+    windowMs : 15*60*1000,
+    max:50,
+    standardHeaders : true,
+    legacyHeaders : false,
+    handler : (req,res)=>{
+        logger.warn(`Sensitive endtpoint rate limit exceeded for IP: ${req.ip}`)
+        res.status(429).json({success: false, message:"too many requests"})
+    },
+    store: RedisStore({
+        sendCoomand : (...args)=>rediClient.call(...args)
+    })
+})
+
+app.use('/api/auth/signup', sensitiveEndpointsLimiter);
+app.use('/api/auth', require('./routes/auth.routes'));
+
+//error handling middleware
