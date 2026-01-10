@@ -7,8 +7,10 @@ const helmet = require('helmet');
 const cors = require('cors');
 const { RateLimiterRedis } = require('rate-limiter-flexible');
 const Redis = require('ioredis');
-const {rateLimit} = require('express-rate-limit');
-const {RedisStore}=require('rate-limit-redis')
+const { rateLimit } = require('express-rate-limit');
+const { RedisStore } = require('rate-limit-redis');
+const errorHandler = require('./middleware/errorHandler');
+const PORT = process.env.PORT || 3001;
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
     logger.info('Connected to mongod');
@@ -36,25 +38,25 @@ const rateLimiter = RateLimiterRedis({
     duration: 1
 })
 
-app.use((req,res,next)=>{
-    rateLimiter.consume(req.ip).then(()=>{next()}).catch(()=>{
+app.use((req, res, next) => {
+    rateLimiter.consume(req.ip).then(() => { next() }).catch(() => {
         logger.warn('Request limit exceeded');
-        res.status(429).json({success: false, message:"too many requests"})
+        res.status(429).json({ success: false, message: "too many requests" })
     })
 })
 
 //Ip based rate limiting for sensitive endpoints
 const sensitiveEndpointsLimiter = rateLimit({
-    windowMs : 15*60*1000,
-    max:50,
-    standardHeaders : true,
-    legacyHeaders : false,
-    handler : (req,res)=>{
+    windowMs: 15 * 60 * 1000,
+    max: 50,
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res) => {
         logger.warn(`Sensitive endtpoint rate limit exceeded for IP: ${req.ip}`)
-        res.status(429).json({success: false, message:"too many requests"})
+        res.status(429).json({ success: false, message: "too many requests" })
     },
     store: RedisStore({
-        sendCoomand : (...args)=>rediClient.call(...args)
+        sendCoomand: (...args) => rediClient.call(...args)
     })
 })
 
@@ -62,3 +64,12 @@ app.use('/api/auth/signup', sensitiveEndpointsLimiter);
 app.use('/api/auth', require('./routes/auth.routes'));
 
 //error handling middleware
+app.use(errorHandler);
+
+app.listen(PORT, () => {
+    logger.info(`Auth server running on ${PORT}`)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+    logger.error('Unhandler rejection at', promise, "reason: ", reason)
+})
