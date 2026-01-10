@@ -18,7 +18,10 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
     logger.error('mongodb connection error', err)
 })
 
-const rediClient = new Redis(process.env.REDIS_URL);
+const rediClient = new Redis({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+});
 
 // Meddliwares
 app.use(helmet());
@@ -31,7 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 
-const rateLimiter = RateLimiterRedis({
+const rateLimiter = new RateLimiterRedis({
     storeClient: rediClient,
     keyPrefix: 'middleware',
     points: 10,
@@ -55,8 +58,8 @@ const sensitiveEndpointsLimiter = rateLimit({
         logger.warn(`Sensitive endtpoint rate limit exceeded for IP: ${req.ip}`)
         res.status(429).json({ success: false, message: "too many requests" })
     },
-    store: RedisStore({
-        sendCoomand: (...args) => rediClient.call(...args)
+    store: new RedisStore({
+        sendCommand: (...args) => rediClient.call(...args)
     })
 })
 

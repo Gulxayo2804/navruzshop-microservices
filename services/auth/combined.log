@@ -1,0 +1,48 @@
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:19:34.128Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:19:34.178Z"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","7":" ","level":"error","message":"Unhandler rejection at","service":"auth","timestamp":"2026-01-10T19:19:44.808Z"}
+{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","7":" ","level":"error","message":"Unhandler rejection at","service":"auth","timestamp":"2026-01-10T19:19:44.809Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:22:04.445Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:22:04.477Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:23:19.839Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:23:19.867Z"}
+{"level":"info","message":"Recieved POST request to /api/auth/signup","service":"auth","timestamp":"2026-01-10T19:25:32.082Z"}
+{"level":"info","message":"Request body: [object Object]","service":"auth","timestamp":"2026-01-10T19:25:32.083Z"}
+{"level":"info","message":"Registration user..","service":"auth","timestamp":"2026-01-10T19:25:32.116Z"}
+{"level":"error","message":"Registirion error accured","service":"auth","timestamp":"2026-01-10T19:25:32.125Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:26:57.374Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:26:57.406Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:27:03.602Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:27:03.638Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:27:23.885Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:27:23.916Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:27:39.671Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:27:39.703Z"}
+{"level":"info","message":"Recieved POST request to /api/auth/signup","service":"auth","timestamp":"2026-01-10T19:27:42.390Z"}
+{"level":"info","message":"Request body: [object Object]","service":"auth","timestamp":"2026-01-10T19:27:42.391Z"}
+{"level":"info","message":"Registration started","service":"auth","timestamp":"2026-01-10T19:27:42.396Z"}
+{"level":"info","message":"User created: 6962a82e1e984dfaef33453f","service":"auth","timestamp":"2026-01-10T19:27:42.501Z"}
+{"error":"RefreshToken validation failed: userId: Path `userId` is required.","level":"error","message":"Registration error occurred","service":"auth","timestamp":"2026-01-10T19:27:42.511Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:37:36.408Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:37:36.442Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:37:47.370Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:37:47.404Z"}
+{"level":"info","message":"Recieved POST request to /api/auth/signup","service":"auth","timestamp":"2026-01-10T19:38:43.384Z"}
+{"level":"info","message":"Request body: [object Object]","service":"auth","timestamp":"2026-01-10T19:38:43.385Z"}
+{"level":"info","message":"Registration started","service":"auth","timestamp":"2026-01-10T19:38:43.390Z"}
+{"level":"warn","message":"User already exists","service":"auth","timestamp":"2026-01-10T19:38:43.408Z"}
+{"level":"info","message":"Recieved POST request to /api/auth/signup","service":"auth","timestamp":"2026-01-10T19:38:53.753Z"}
+{"level":"info","message":"Request body: [object Object]","service":"auth","timestamp":"2026-01-10T19:38:53.753Z"}
+{"level":"info","message":"Registration started","service":"auth","timestamp":"2026-01-10T19:38:53.756Z"}
+{"level":"info","message":"User created: 6962aacd53a7bf9776b071b2","service":"auth","timestamp":"2026-01-10T19:38:53.823Z"}
+{"error":"RefreshToken validation failed: userId: Path `userId` is required.","level":"error","message":"Registration error occurred","service":"auth","timestamp":"2026-01-10T19:38:53.831Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:39:16.318Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:39:16.348Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:39:18.982Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:39:19.009Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-10T19:39:20.880Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-10T19:39:20.911Z"}
+{"level":"info","message":"Recieved POST request to /api/auth/signup","service":"auth","timestamp":"2026-01-10T19:39:27.966Z"}
+{"level":"info","message":"Request body: [object Object]","service":"auth","timestamp":"2026-01-10T19:39:27.966Z"}
+{"level":"info","message":"Registration started","service":"auth","timestamp":"2026-01-10T19:39:27.972Z"}
+{"level":"info","message":"User created: 6962aaf0e5708df42205320e","service":"auth","timestamp":"2026-01-10T19:39:28.053Z"}

@@ -20,4 +20,4 @@ const userSchema = moongose.Schema({
     timestamps:true
 })
 
-module.exports = moongose.Model('User', userSchema);
+module.exports = moongose.model('User', userSchema);

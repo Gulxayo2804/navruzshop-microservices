@@ -13,7 +13,7 @@ const generateTokens = async (user) => {
 
     await RefreshToken.create({
         token: refreshToken,
-        useId: user._id,
+        userId: user._id,
         expiresAt
     });
     return { accessToken, refreshToken };
