@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { validate } from '../middleware/validate';
 import { registerSchema, loginSchema } from '../validators/auth.validator';
-import { register, login } from '../controllers/auth.controller';
+import { register, login, refreshToken } from '../controllers/auth.controller';
 
 const router = Router();
 
@@ -67,5 +67,32 @@ router.post("/register", validate(registerSchema), register)
  */
 
 router.post("/login", validate(loginSchema), login);
+
+/**
+ * @openapi
+ * /auth/refresh:
+ *   post:
+ *     summary: Refresh access token
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - refreshToken
+ *             properties:
+ *               refreshToken:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: New access token issued
+ *       401:
+ *         description: Invalid refresh token
+ */
+
+router.post("/refresh", refreshToken);
 
 export default router;

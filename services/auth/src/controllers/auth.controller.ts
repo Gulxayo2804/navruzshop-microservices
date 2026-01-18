@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { UserModel } from '../models/user.model';
 import { logger } from '../../../../shared/logger/index';
 import { hashPassword, comparePassword } from '../utils/password';
-import { generateAccessToken, generateRefreshToken } from "../utils/token";
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../utils/token";
 import { redis } from "../config/redis";
 
 export const register = async (req: Request, res: Response) => {
@@ -71,3 +71,30 @@ export const login = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Login failed" });
     }
 };
+
+export const refreshToken = async (req: Request, res: Response) => {
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
+        return res.status(400).json({ message: "Refresh token required" });
+    }
+
+    try {
+        const payload = verifyRefreshToken(refreshToken) as {
+            userId: string;
+            role: string;
+        }
+        const storedToken = redis.get(`refresh:${payload.userId}`);
+        if (!storedToken || storedToken !== refreshToken) {
+            return res.status(401).json({ message: "Invalid refresh token" });
+        }
+        const newAccessToken = generateAccessToken({
+            userId: payload.userId,
+            role: payload.role,
+        });
+
+        return res.json({ accessToken: newAccessToken });
+
+    } catch (error) {
+        return res.status(401).json({ message: "Invalid refresh token" });
+    }
+}
