@@ -3,12 +3,15 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { logger } from '../../../shared/logger/index';
 import authRouter from './routes/auth.routes';
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
 
 const app = express();
 
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/auth', authRouter);
 
