@@ -46,3 +46,9 @@
 {"level":"info","message":"Request body: [object Object]","service":"auth","timestamp":"2026-01-10T19:39:27.966Z"}
 {"level":"info","message":"Registration started","service":"auth","timestamp":"2026-01-10T19:39:27.972Z"}
 {"level":"info","message":"User created: 6962aaf0e5708df42205320e","service":"auth","timestamp":"2026-01-10T19:39:28.053Z"}
+{"level":"info","message":"Auth server running on 3001","service":"auth","timestamp":"2026-01-14T00:52:01.529Z"}
+{"level":"info","message":"Connected to mongod","service":"auth","timestamp":"2026-01-14T00:52:01.566Z"}
+{"level":"info","message":"Recieved POST request to /api/auth/signup","service":"auth","timestamp":"2026-01-14T00:52:32.408Z"}
+{"level":"info","message":"Request body: [object Object]","service":"auth","timestamp":"2026-01-14T00:52:32.409Z"}
+{"level":"info","message":"Registration started","service":"auth","timestamp":"2026-01-14T00:52:32.415Z"}
+{"level":"info","message":"User created: 6966e8d0ceeeeb8061829fc9","service":"auth","timestamp":"2026-01-14T00:52:32.529Z"}
