@@ -12,6 +12,8 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - navruzshop-network
 
   redis:
     image: redis:7
@@ -19,6 +21,8 @@ services:
     restart: always
     ports:
       - "6379:6379"
+    networks:
+      - navruzshop-network
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -27,6 +31,27 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - navruzshop-network
+  auth-service:
+    build:
+      context: .
+      dockerfile: services/auth/Dockerfile
+    container_name: navruzshop-auth
+    restart: always
+    env_file:
+      - ./services/auth/.env
+    ports:
+      - "4001:4001"
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - navruzshop-network
+
 
 volumes:
   mongo_data:
+networks:
+  navruzshop-network:
+    driver: bridge
