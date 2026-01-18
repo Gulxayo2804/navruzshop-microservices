@@ -1,5 +1,0 @@
-{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","7":" ","level":"error","message":"Unhandler rejection at","service":"auth","timestamp":"2026-01-10T19:19:44.808Z"}
-{"0":"r","1":"e","2":"a","3":"s","4":"o","5":"n","6":":","7":" ","level":"error","message":"Unhandler rejection at","service":"auth","timestamp":"2026-01-10T19:19:44.809Z"}
-{"level":"error","message":"Registirion error accured","service":"auth","timestamp":"2026-01-10T19:25:32.125Z"}
-{"error":"RefreshToken validation failed: userId: Path `userId` is required.","level":"error","message":"Registration error occurred","service":"auth","timestamp":"2026-01-10T19:27:42.511Z"}
-{"error":"RefreshToken validation failed: userId: Path `userId` is required.","level":"error","message":"Registration error occurred","service":"auth","timestamp":"2026-01-10T19:38:53.831Z"}
