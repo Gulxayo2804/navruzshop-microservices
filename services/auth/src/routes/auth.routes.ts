@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { validate } from '../middleware/validate';
 import { registerSchema, loginSchema } from '../validators/auth.validator';
-import { register, login, refreshToken } from '../controllers/auth.controller';
+import { register, login, refreshToken, logout } from '../controllers/auth.controller';
 
 const router = Router();
 
@@ -94,5 +94,31 @@ router.post("/login", validate(loginSchema), login);
  */
 
 router.post("/refresh", refreshToken);
+
+/**
+ * @openapi
+ * /auth/logout:
+ *   post:
+ *     summary: Logout user
+ *     tags:
+ *       - Auth
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userId
+ *             properties:
+ *               userId:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Logout successful
+ */
+
+router.post("/logout", logout);
+
 
 export default router;

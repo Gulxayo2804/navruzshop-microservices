@@ -98,3 +98,15 @@ export const refreshToken = async (req: Request, res: Response) => {
         return res.status(401).json({ message: "Invalid refresh token" });
     }
 }
+
+export const logout = async (req: Request, res: Response) => {
+    const { userId } = req.body;
+
+    if (!userId) {
+        return res.status(400).json({ message: "User ID required" });
+    }
+
+    await redis.del(`refresh:${userId}`);
+
+    return res.json({ message: "Logged out successfully" });
+};
