@@ -1,7 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-// import {logger} from '../../../shared/logger/index';
+import {logger} from '../../../shared/logger/index';
 
 const app = express();
 
