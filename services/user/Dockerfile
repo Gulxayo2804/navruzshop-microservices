@@ -2,14 +2,14 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY services/auth/package*.json ./services/auth/
-RUN cd services/auth && npm install
+COPY services/user/package*.json ./services/user/
+RUN cd services/user && npm install
 
-COPY services/auth ./services/auth
+COPY services/user ./services/user
 COPY shared ./shared
 
-RUN cd services/auth && npm run build
+RUN cd services/user && npm run build
 
-EXPOSE 4001
+EXPOSE 4002
 
-CMD ["node", "services/auth/dist/server.js"]
+CMD ["node", "services/user/dist/server.js"]
