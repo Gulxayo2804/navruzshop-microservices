@@ -5,3 +5,8 @@ export const authProxy = createProxyMiddleware({
     changeOrigin: true,
     pathRewrite: { '^/auth': '/auth' }
 })
+
+export const userProxy = createProxyMiddleware({
+  target: process.env.USER_SERVICE_URL,
+  changeOrigin: true,
+});

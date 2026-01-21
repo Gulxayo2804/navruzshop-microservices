@@ -48,7 +48,20 @@ services:
       - redis
     networks:
       - navruzshop-network
-
+  user-service:
+    build:
+      context: .
+      dockerfile: services/user/Dockerfile
+    container_name: navruzshop-user
+    restart: always
+    env_file:
+      - ./services/user/.env
+    ports:
+      - "4002:4002"
+    depends_on:
+      - mongodb
+    networks:
+      - navruzshop-network
 
 volumes:
   mongo_data:
