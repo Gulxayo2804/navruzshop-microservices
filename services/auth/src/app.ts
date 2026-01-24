@@ -18,7 +18,7 @@ app.get("/protected", authenticate, (req, res) => {
   res.json({ message: "Protected route accessed" });
 });
 
-app.use('/auth', authRouter);
+app.use('/', authRouter);
 
 app.use('/health', (_req, res) => {
     res.json({ status: "Auth service running" });

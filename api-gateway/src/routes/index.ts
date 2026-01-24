@@ -4,14 +4,10 @@ import { authProxy, userProxy } from "../middleware/proxy";
 
 const router = Router();
 
-// public
+// PUBLIC — no auth
 router.use("/auth", authProxy);
 
-// protected
+// PROTECTED — auth FIRST, then proxy
 router.use("/users", authenticate, userProxy);
-
-router.get("/health", authenticate, (_req, res) => {
-  res.json({ status: "Gateway protected route OK" });
-});
 
 export default router;

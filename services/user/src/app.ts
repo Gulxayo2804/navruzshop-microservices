@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(userContext);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use("/users", userRoutes);
+app.use("/", userRoutes);
 
 app.get("/health", (_req, res) => {
   res.json({ status: "User service running" });

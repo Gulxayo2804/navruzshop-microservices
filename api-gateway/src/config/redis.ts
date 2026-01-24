@@ -9,6 +9,6 @@ redis.on("connect", () => {
   console.log("Redis connected (API Gateway)");
 });
 
-redis.on("error", (err) => {
-  console.error("Redis error", err);
+redis.on("error", (err: Error) => {
+  console.error("Redis error:", err);
 });

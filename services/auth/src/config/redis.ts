@@ -1,15 +1,19 @@
 import Redis from "ioredis";
-import { logger } from "../../../../shared/logger";
 
 export const redis = new Redis({
   host: process.env.REDIS_HOST || "localhost",
   port: Number(process.env.REDIS_PORT) || 6379,
+  retryStrategy(times) {
+    const delay = Math.min(times * 500, 5000);
+    console.log(`Redis retry #${times} in ${delay}ms`);
+    return delay;
+  },
 });
 
 redis.on("connect", () => {
-  logger.info("Redis connected (Auth Service)");
+  console.log("Redis connected (API Gateway)");
 });
 
-redis.on("error", (err) => {
-  logger.error("Redis error", err);
+redis.on("error", (err: Error) => {
+  console.error("Redis error:", err);
 });
