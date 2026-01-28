@@ -1,6 +1,13 @@
-import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
-export const connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_URI!);
-  console.log("MongoDB connected (Product Service)");
-};
+import app from "./app";
+import { connectDB } from "./config/db";
+
+const PORT = process.env.PORT || 4003;
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Product service running on port ${PORT}`);
+  });
+});
