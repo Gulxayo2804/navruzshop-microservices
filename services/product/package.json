@@ -15,9 +15,11 @@
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "helmet": "^8.1.0",
     "joi": "^18.0.2",
     "mongoose": "^9.1.5",
     "swagger-ui-express": "^5.0.1",
+    "winston": "^3.19.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
