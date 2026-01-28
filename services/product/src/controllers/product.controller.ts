@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ProductModel } from '../models/product.model';
+import {createProductSchema} from '../validators/product.validator';
 
 export const getProducts = async (req: Request, res: Response) => {
     const products = await ProductModel.find().populate('category');
@@ -7,6 +8,10 @@ export const getProducts = async (req: Request, res: Response) => {
 }
 
 export const createProduct = async (req: Request, res: Response) => {
+  const {error} = createProductSchema.validate(req.body);
+   if (error) {
+    return res.status(400).json({ message: error.message });
+  }
   const product = await ProductModel.create(req.body);
   res.status(201).json(product);
 };
