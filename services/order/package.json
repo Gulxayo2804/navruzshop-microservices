@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.19",
     "amqplib": "^0.10.9",
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
