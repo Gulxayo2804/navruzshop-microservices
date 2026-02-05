@@ -17,3 +17,11 @@ export const productProxy = createProxyMiddleware({
     "^/products": "",
   },
 });
+
+export const orderProxy = createProxyMiddleware({
+  target: process.env.ORDER_SERVICE_URL,
+  changeOrigin: true,
+  pathRewrite: {
+    "^/orders": "",
+  },
+});
