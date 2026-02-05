@@ -2,13 +2,14 @@ import { Router } from "express";
 import { authenticate } from "../middleware/auth.middleware";
 import { authProxy, userProxy, productProxy, orderProxy } from "../middleware/proxy";
 import { requireAdmin } from "../middleware/role.middleware";
+import { authLimiter, orderLimiter } from "../middleware/rate-limit";
 
 const router = Router();
 
 // PUBLIC — no auth
-router.use("/auth", authProxy);
+router.use("/auth", authLimiter, authProxy);
 
-router.use("/users", authenticate, userProxy);
+router.use("/users", authenticate, orderLimiter, userProxy);
 
 // Public product read
 router.get("/products", productProxy);
