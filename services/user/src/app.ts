@@ -5,7 +5,7 @@ import userRoutes from "./routes/user.routes";
 import { userContext } from "./middleware/auth-context";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";
-
+import { errorHandler } from "./middleware/error.middleware";
 
 const app = express();
 
@@ -20,5 +20,7 @@ app.use("/", userRoutes);
 app.get("/health", (_req, res) => {
   res.json({ status: "User service running" });
 });
+
+app.use(errorHandler);
 
 export default app;

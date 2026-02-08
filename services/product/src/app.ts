@@ -5,6 +5,7 @@ import productRoutes from "./routes/product.routes";
 import { authContext } from "./middleware/auth-context";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";
+import { errorHandler } from "./middleware/error.middleware";
 
 const app = express();
 
@@ -20,5 +21,7 @@ app.use("/products", productRoutes);
 app.get("/health", (_req, res) => {
   res.json({ status: "Product service running" });
 });
+
+app.use(errorHandler);
 
 export default app;

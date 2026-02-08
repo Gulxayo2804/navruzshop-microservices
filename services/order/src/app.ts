@@ -5,6 +5,7 @@ import orderRoutes from "./routes/order.routes";
 import { authContext } from "./middleware/auth-context";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";
+import { errorHandler } from "./middleware/error.middleware";
 
 const app = express();
 
@@ -16,5 +17,7 @@ app.use(authContext);
 app.use("/orders", orderRoutes);
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(errorHandler);
 
 export default app;
