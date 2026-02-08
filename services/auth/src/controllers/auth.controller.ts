@@ -4,6 +4,7 @@ import { logger } from '../../../../shared/logger/index';
 import { hashPassword, comparePassword } from '../utils/password';
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../utils/token";
 import { redis } from "../config/redis";
+import { AppError } from '../../../../shared/errors/AppError';
 
 export const register = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -29,10 +30,8 @@ export const register = async (req: Request, res: Response) => {
             createdAt: user.createdAt,
         });
     } catch (error) {
-        logger.error('USer registration error', error)
-        return res.status(500).json({
-            message: "Internal server error",
-        });
+        logger.error('User registration error', error)
+       throw new AppError('Failed to register user', 500)
     }
 }
 
@@ -68,7 +67,7 @@ export const login = async (req: Request, res: Response) => {
             refreshToken,
         });
     } catch (error) {
-        return res.status(500).json({ message: "Login failed" });
+        throw new AppError('Failed to login user', 500)
     }
 };
 

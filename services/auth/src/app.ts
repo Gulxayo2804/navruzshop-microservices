@@ -6,6 +6,7 @@ import authRouter from './routes/auth.routes';
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";
 import { authenticate } from "./middleware/auth.middleware";
+import { errorHandler } from './middleware/error.middleware';
 
 const app = express();
 
@@ -23,5 +24,7 @@ app.use('/', authRouter);
 app.use('/health', (_req, res) => {
     res.json({ status: "Auth service running" });
 })
+
+app.use(errorHandler);
 
 export default app;
