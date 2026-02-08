@@ -8,7 +8,7 @@ export interface IOrder extends Document {
         price: number
     }[],
     totalAmount: number,
-    status: 'PENDING' | 'PAID' | 'CANCELED'
+    status: "PENDING" | "PAID" | "FAILED" | "CANCELLED"
 }
 
 const OrderSchema = new Schema<IOrder>(
