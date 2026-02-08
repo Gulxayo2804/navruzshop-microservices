@@ -9,8 +9,6 @@ const start = async () => {
   await connectDB();
   const channel = await connectRabbitMQ();
   await consumeOrderCreated(channel);
-
-  console.log("Inventory Service listening for order.created");
 };
 
 start();
