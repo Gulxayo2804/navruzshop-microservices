@@ -1,80 +1,64 @@
 services:
   mongodb:
     image: mongo:6
-    container_name: navruzshop-mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
-    ports:
-      - "27017:27017"
-    networks:
-      - navruzshop-network
+    ports: ["27017:27017"]
 
   redis:
     image: redis:7
-    container_name: navruzshop-redis
-    restart: always
-    ports:
-      - "6379:6379"
-    networks:
-      - navruzshop-network
+    ports: ["6379:6379"]
 
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: navruzshop-rabbitmq
-    restart: always
     ports:
       - "5672:5672"
       - "15672:15672"
-    networks:
-      - navruzshop-network
-
-  auth-service:
-    build:
-      context: .
-      dockerfile: services/auth/Dockerfile
-    container_name: navruzshop-auth
-    env_file:
-      - ./services/auth/.env
-    ports:
-      - "4001:4001"
-    depends_on:
-      - mongodb
-      - redis
-    networks:
-      - navruzshop-network
-
-  user-service:
-    build:
-      context: .
-      dockerfile: services/user/Dockerfile
-    container_name: navruzshop-user
-    env_file:
-      - ./services/user/.env
-    ports:
-      - "4002:4002"
-    depends_on:
-      - mongodb
-    networks:
-      - navruzshop-network
 
   api-gateway:
     build:
       context: .
       dockerfile: api-gateway/Dockerfile
-    container_name: navruzshop-api-gateway
-    env_file:
-      - ./api-gateway/.env
-    ports:
-      - "3000:3000"
-    depends_on:
-      - auth-service
-      - user-service
-      - redis
-    networks:
-      - navruzshop-network
+    ports: ["3000:3000"]
+    env_file: api-gateway/.env
+    depends_on: [auth, user, product, order, redis]
 
-networks:
-  navruzshop-network:
-    driver: bridge
+  auth:
+    build:
+      context: .
+      dockerfile: services/auth/Dockerfile
+    env_file: services/auth/.env
+    depends_on: [mongodb, redis]
+
+  user:
+    build:
+      context: .
+      dockerfile: services/user/Dockerfile
+    env_file: services/user/.env
+    depends_on: [mongodb]
+
+  product:
+    build:
+      context: .
+      dockerfile: services/product/Dockerfile
+    env_file: services/product/.env
+    depends_on: [mongodb]
+
+  order:
+    build:
+      context: .
+      dockerfile: services/order/Dockerfile
+    env_file: services/order/.env
+    depends_on: [mongodb, rabbitmq]
+
+  payment:
+    build:
+      context: .
+      dockerfile: services/payment/Dockerfile
+    env_file: services/payment/.env
+    depends_on: [rabbitmq]
+
+  inventory:
+    build:
+      context: .
+      dockerfile: services/inventory/Dockerfile
+    env_file: services/inventory/.env
+    depends_on: [mongodb, rabbitmq]
