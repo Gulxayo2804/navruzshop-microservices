@@ -6,7 +6,6 @@ COPY services/inventory/package*.json ./services/inventory/
 RUN cd services/inventory && npm install
 
 COPY services/inventory ./services/inventory
-COPY shared ./shared
 
 RUN cd services/inventory && npm run build
 

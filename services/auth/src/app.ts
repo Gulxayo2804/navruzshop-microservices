@@ -1,7 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import { logger } from '../../../shared/logger/index';
 import authRouter from './routes/auth.routes';
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";

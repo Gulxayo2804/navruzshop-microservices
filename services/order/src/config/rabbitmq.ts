@@ -1,12 +1,21 @@
-import amqp from 'amqplib';
+import amqp, { Channel } from "amqplib";
 
-let channel: amqp.Channel;
+let channel: Channel;
 
-export const connectRabbitMQ = async () => {
-    const connectiom = await amqp.connect(process.env.RABBITMQ_URL!);
-    channel = await connectiom.createChannel();
+export const connectRabbitMQ = async (): Promise<Channel> => {
+  const connection = await amqp.connect(process.env.RABBITMQ_URL!);
+  channel = await connection.createChannel();
 
-    await channel.assertExchange('ORDER_EVENTS', 'topic', { durable: true })
-    console.log("RabbitMQ connected (Order Service)");
-}
-export const getChannel = () => channel;
+  await channel.assertExchange("ORDER_EVENTS", "topic", { durable: true });
+
+  console.log("RabbitMQ connected (Order Service)");
+
+  return channel; 
+};
+
+export const getChannel = (): Channel => {
+  if (!channel) {
+    throw new Error("RabbitMQ channel not initialized");
+  }
+  return channel;
+};

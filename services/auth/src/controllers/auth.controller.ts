@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
 import { UserModel } from '../models/user.model';
-import { logger } from '../../../../shared/logger/index';
 import { hashPassword, comparePassword } from '../utils/password';
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../utils/token";
 import { redis } from "../config/redis";
-import { AppError } from '../../../../shared/errors/AppError';
 
 export const register = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -12,7 +10,7 @@ export const register = async (req: Request, res: Response) => {
     try {
         const exitUser = await UserModel.findOne({ email });
         if (exitUser) {
-            logger.warn('User already exit');
+            console.log('User already exit');
             return res.status(409).json({
                 message: "Email already registered",
             });
@@ -30,8 +28,9 @@ export const register = async (req: Request, res: Response) => {
             createdAt: user.createdAt,
         });
     } catch (error) {
-        logger.error('User registration error', error)
-       throw new AppError('Failed to register user', 500)
+        console.error('User registration error', error)
+        throw error;
+    //    throw new AppError('Failed to register user', 500)
     }
 }
 
@@ -67,7 +66,7 @@ export const login = async (req: Request, res: Response) => {
             refreshToken,
         });
     } catch (error) {
-        throw new AppError('Failed to login user', 500)
+        throw error;
     }
 };
 

@@ -6,7 +6,6 @@ COPY services/user/package*.json ./services/user/
 RUN cd services/user && npm install
 
 COPY services/user ./services/user
-COPY shared ./shared
 
 RUN cd services/user && npm run build
 

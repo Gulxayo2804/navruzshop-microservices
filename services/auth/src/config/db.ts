@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { logger } from '../../../../shared/logger/index';
 
 export const ConnectDB = async () => {
     const mongoUri = process.env.MONGO_URI;
@@ -8,9 +7,9 @@ export const ConnectDB = async () => {
     }
     try {
         await mongoose.connect(mongoUri)
-        logger.info("MongoDB connected (Auth Service)");
+        console.log("MongoDB connected (Auth Service)");
     } catch (error) {
-        logger.error('Mongodb filed', error);
+        console.error('Mongodb filed', error);
         process.exit(1);
     }
 }

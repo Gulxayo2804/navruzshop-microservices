@@ -6,7 +6,6 @@ COPY services/product/package*.json ./services/product/
 RUN cd services/product && npm install
 
 COPY services/product ./services/product
-COPY shared ./shared
 
 RUN cd services/product && npm run build
 
