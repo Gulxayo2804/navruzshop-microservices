@@ -12,16 +12,10 @@ export const userProxy = createProxyMiddleware({
 
 export const productProxy = createProxyMiddleware({
   target: process.env.PRODUCT_SERVICE_URL,
-  changeOrigin: true,
-  pathRewrite: {
-    "^/products": "",
-  },
+  changeOrigin: true
 });
 
 export const orderProxy = createProxyMiddleware({
   target: process.env.ORDER_SERVICE_URL,
-  changeOrigin: true,
-  pathRewrite: {
-    "^/orders": "",
-  },
+  changeOrigin: true
 });
