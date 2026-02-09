@@ -10,6 +10,6 @@ COPY shared ./shared
 
 RUN cd services/inventory && npm run build
 
-EXPOSE 4002
+
 
 CMD ["node", "services/inventory/dist/server.js"]
